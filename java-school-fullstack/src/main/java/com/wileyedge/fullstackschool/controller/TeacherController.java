@@ -11,51 +11,61 @@ import java.util.List;
 @CrossOrigin
 public class TeacherController {
 
-    @Autowired
-    TeacherServiceImpl teacherServiceImpl;
+	@Autowired
+	TeacherServiceImpl teacherServiceImpl;
 
-    @GetMapping("/teachers")
-    public List<Teacher> getAllTeachers() {
-        //YOUR CODE STARTS HERE
+	@GetMapping("/teachers")
+	public List<Teacher> getAllTeachers() {
+		// YOUR CODE STARTS HERE
 
-        return null;
+		List<Teacher> teachers = teacherServiceImpl.getAllTeachers();
 
-        //YOUR CODE ENDS HERE
-    }
+		// TODO ERROR HANDLING ?
+		return teachers;
 
-    @GetMapping("/{id}")
-    public Teacher getTeacherById(@PathVariable int id) {
-        //YOUR CODE STARTS HERE
+		// YOUR CODE ENDS HERE
+	}
 
-        return null;
+	@GetMapping("/{id}")
+	public Teacher getTeacherById(@PathVariable int id) {
+		// YOUR CODE STARTS HERE
 
-        //YOUR CODE ENDS HERE
-    }
+		Teacher teacher1 = teacherServiceImpl.getTeacherById(id);
 
-    @PostMapping("/add")
-    public Teacher addTeacher(@RequestBody Teacher teacher) {
-        //YOUR CODE STARTS HERE
+		// TODO ERROR HANDLING ?
+		return teacher1;
 
-        return null;
+		// YOUR CODE ENDS HERE
+	}
 
-        //YOUR CODE ENDS HERE
-    }
+	@PostMapping("/add")
+	public Teacher addTeacher(@RequestBody Teacher teacher) {
+		// YOUR CODE STARTS HERE
 
-    @PutMapping("/{id}")
-    public Teacher updateTeacher(@PathVariable int id, @RequestBody Teacher teacher) {
-        //YOUR CODE STARTS HERE
+		Teacher teacher1 = teacherServiceImpl.addNewTeacher(teacher);
+		// TODO ERROR HANDLING ?
+		return teacher1;
 
-        return null;
+		// YOUR CODE ENDS HERE
+	}
 
-        //YOUR CODE ENDS HERE
-    }
+	@PutMapping("/{id}")
+	public Teacher updateTeacher(@PathVariable int id, @RequestBody Teacher teacher) {
+		// YOUR CODE STARTS HERE
 
-    @DeleteMapping("/{id}")
-    public void deleteTeacher(@PathVariable int id) {
-        //YOUR CODE STARTS HERE
+		Teacher teacher1 = teacherServiceImpl.updateTeacherData(id, teacher);
+		// TODO ERROR HANDLING ?
+		return teacher1;
 
+		// YOUR CODE ENDS HERE
+	}
 
+	@DeleteMapping("/{id}")
+	public void deleteTeacher(@PathVariable int id) {
+		// YOUR CODE STARTS HERE
 
-        //YOUR CODE ENDS HERE
-    }
+		teacherServiceImpl.deleteTeacherById(id);
+
+		// YOUR CODE ENDS HERE
+	}
 }

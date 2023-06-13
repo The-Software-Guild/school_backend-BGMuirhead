@@ -11,51 +11,65 @@ import java.util.List;
 @CrossOrigin
 public class CourseController {
 
-    @Autowired
-    CourseServiceImpl courseService;
+	@Autowired
+	CourseServiceImpl courseService;
 
-    @GetMapping("/courses")
-    public List<Course> getAllCourses() {
-        //YOUR CODE STARTS HERE
+	@GetMapping("/courses")
+	public List<Course> getAllCourses() {
+		// YOUR CODE STARTS HERE
 
-        return null;
+		// get list of courses
+		List<Course> courses = courseService.getAllCourses();
 
-        //YOUR CODE ENDS HERE
-    }
+		return courses;
 
-    @GetMapping("/{id}")
-    public Course getCourseById(@PathVariable int id) {
-        //YOUR CODE STARTS HERE
+		// YOUR CODE ENDS HERE
+	}
 
-        return null;
+	@GetMapping("/{id}")
+	public Course getCourseById(@PathVariable int id) {
+		// YOUR CODE STARTS HERE
 
-        //YOUR CODE ENDS HERE
-    }
+		Course course = courseService.getCourseById(id);
 
-    @PostMapping("/add")
-    public Course addCourse(@RequestBody Course course) {
-        //YOUR CODE STARTS HERE
+		// TODO ERROR HANDLING ?
 
-        return null;
+		return course;
 
-        //YOUR CODE ENDS HERE
-    }
+		// YOUR CODE ENDS HERE
+	}
 
-    @PutMapping("/{id}")
-    public Course updateCourse(@PathVariable int id, @RequestBody Course course) {
-        //YOUR CODE STARTS HERE
+	@PostMapping("/add")
+	public Course addCourse(@RequestBody Course course) {
+		// YOUR CODE STARTS HERE
+		Course course1 = courseService.addNewCourse(course);
 
-        return null;
+		// TODO ERROR HANDLING ?
 
-        //YOUR CODE ENDS HERE
-    }
+		return course1;
 
-    @DeleteMapping("/{id}")
-    public void deleteCourse(@PathVariable int id) {
-        //YOUR CODE STARTS HERE
+		// YOUR CODE ENDS HERE
+	}
 
+	@PutMapping("/{id}")
+	public Course updateCourse(@PathVariable int id, @RequestBody Course course) {
+		// YOUR CODE STARTS HERE
 
+		Course course1 = courseService.updateCourseData(id, course);
 
-        //YOUR CODE ENDS HERE
-    }
+		// TODO ERROR HANDLING ?
+
+		return course1;
+
+		// YOUR CODE ENDS HERE
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteCourse(@PathVariable int id) {
+		// YOUR CODE STARTS HERE
+
+		courseService.deleteCourseById(id);
+
+		// YOUR CODE ENDS HERE
+	}
 }
