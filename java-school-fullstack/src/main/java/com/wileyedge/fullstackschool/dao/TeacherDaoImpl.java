@@ -14,55 +14,64 @@ import java.util.List;
 @Repository
 public class TeacherDaoImpl implements TeacherDao {
 
-    private final JdbcTemplate jdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
 
-    public TeacherDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+	public TeacherDaoImpl(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
-    @Override
-    public Teacher createNewTeacher(Teacher teacher) {
-        //YOUR CODE STARTS HERE
+	@Override
+	public Teacher createNewTeacher(Teacher teacher) {
+		// YOUR CODE STARTS HERE
 
-        return null;
+		String sql = "insert into teacher values (?,?,?,?)";
+		jdbcTemplate.update(sql, teacher.getTeacherId(), teacher.getTeacherFName(), teacher.getTeacherLName(),
+				teacher.getDept());
 
-        //YOUR CODE ENDS HERE
-    }
+		return teacher;
 
-    @Override
-    public List<Teacher> getAllTeachers() {
-        //YOUR CODE STARTS HERE
+		// YOUR CODE ENDS HERE
+	}
 
+	@Override
+	public List<Teacher> getAllTeachers() {
+		// YOUR CODE STARTS HERE
 
-        return null;
+		String sql = "select * from teacher";
 
-        //YOUR CODE ENDS HERE
-    }
+		return jdbcTemplate.query(sql, new TeacherMapper());
 
-    @Override
-    public Teacher findTeacherById(int id) {
-        //YOUR CODE STARTS HERE
+		// YOUR CODE ENDS HERE
+	}
 
+	@Override
+	public Teacher findTeacherById(int id) {
+		// YOUR CODE STARTS HERE
 
-        return null;
+		String sql = "select * from teacher where tid=?";
 
-        //YOUR CODE ENDS HERE
-    }
+		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new TeacherMapper());
 
-    @Override
-    public void updateTeacher(Teacher t) {
-        //YOUR CODE STARTS HERE
+		// YOUR CODE ENDS HERE
+	}
 
+	@Override
+	public void updateTeacher(Teacher t) {
+		// YOUR CODE STARTS HERE
 
+		String sql = "update teacher set tFNamer=?,tLName=?,dept=? where tid=?";
+		jdbcTemplate.update(sql, t.getTeacherFName(), t.getTeacherLName(), t.getDept(), t.getTeacherId());
 
-        //YOUR CODE ENDS HERE
-    }
+		// YOUR CODE ENDS HERE
+	}
 
-    @Override
-    public void deleteTeacher(int id) {
-        //YOUR CODE STARTS HERE
+	@Override
+	public void deleteTeacher(int id) {
+		// YOUR CODE STARTS HERE
 
+		String sql = "delete from teacher where tid=?";
+		jdbcTemplate.update(sql, new Object[] { id });
 
-        //YOUR CODE ENDS HERE
-    }
+		// YOUR CODE ENDS HERE
+	}
 }

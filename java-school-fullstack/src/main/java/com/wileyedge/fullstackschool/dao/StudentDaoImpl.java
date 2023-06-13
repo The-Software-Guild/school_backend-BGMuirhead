@@ -15,73 +15,87 @@ import java.util.List;
 @Repository
 public class StudentDaoImpl implements StudentDao {
 
-    @Autowired
-    private final JdbcTemplate jdbcTemplate;
+	@Autowired
+	private final JdbcTemplate jdbcTemplate;
 
-    public StudentDaoImpl(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+	public StudentDaoImpl(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
-    @Override
-    @Transactional
-    public Student createNewStudent(Student student) {
-        //YOUR CODE STARTS HERE
+	@Override
+	@Transactional
+	public Student createNewStudent(Student student) {
+		// YOUR CODE STARTS HERE
 
-         return null;
+		String sql = "insert into student values(?,?,?)";
+		jdbcTemplate.update(sql, student.getStudentId(), student.getStudentFirstName(), student.getStudentLastName());
 
-        //YOUR CODE ENDS HERE
-    }
+		return student;
 
-    @Override
-    public List<Student> getAllStudents() {
-        //YOUR CODE STARTS HERE
+		// YOUR CODE ENDS HERE
+	}
 
-        return null;
+	@Override
+	public List<Student> getAllStudents() {
+		// YOUR CODE STARTS HERE
 
-        //YOUR CODE ENDS HERE
-    }
+		String sql = "select * from student";
 
-    @Override
-    public Student findStudentById(int id) {
-        //YOUR CODE STARTS HERE
+		return jdbcTemplate.query(sql, new StudentMapper());
 
-        return null;
+		// YOUR CODE ENDS HERE
+	}
 
-        //YOUR CODE ENDS HERE
-    }
+	@Override
+	public Student findStudentById(int id) {
+		// YOUR CODE STARTS HERE
 
-    @Override
-    public void updateStudent(Student student) {
-        //YOUR CODE STARTS HERE
+		String sql = "select * from student where sid=?";
 
+		return jdbcTemplate.queryForObject(sql, new Object[] { id }, new StudentMapper());
 
-        //YOUR CODE ENDS HERE
-    }
+		// YOUR CODE ENDS HERE
+	}
 
-    @Override
-    public void deleteStudent(int id) {
-        //YOUR CODE STARTS HERE
+	@Override
+	public void updateStudent(Student student) {
+		// YOUR CODE STARTS HERE
 
+		String sql = "update student, set fName=?,lName=? where sid =?";
 
+		jdbcTemplate.update(sql, student.getStudentFirstName(), student.getStudentLastName(), student.getStudentId());
 
-        //YOUR CODE ENDS HERE
-    }
+		// YOUR CODE ENDS HERE
+	}
 
-    @Override
-    public void addStudentToCourse(int studentId, int courseId) {
-        //YOUR CODE STARTS HERE
+	@Override
+	public void deleteStudent(int id) {
+		// YOUR CODE STARTS HERE
 
+		String sql = "delete from student where sid=?";
 
+		jdbcTemplate.update(sql, new Object[] { id });
+		// YOUR CODE ENDS HERE
+	}
 
-        //YOUR CODE ENDS HERE
-    }
+	@Override
+	public void addStudentToCourse(int studentId, int courseId) {
+		// YOUR CODE STARTS HERE
 
-    @Override
-    public void deleteStudentFromCourse(int studentId, int courseId) {
-        //YOUR CODE STARTS HERE
+		String sql = "insert into course_student values(?,?)";
 
+		jdbcTemplate.update(sql, studentId, courseId);
 
+		// YOUR CODE ENDS HERE
+	}
 
-        //YOUR CODE ENDS HERE
-    }
+	@Override
+	public void deleteStudentFromCourse(int studentId, int courseId) {
+		// YOUR CODE STARTS HERE
+
+		String sql = "delete from course_student where student_id=? and course_id=?";
+
+		jdbcTemplate.update(sql, studentId, courseId);
+		// YOUR CODE ENDS HERE
+	}
 }
