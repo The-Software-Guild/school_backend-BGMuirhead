@@ -11,7 +11,7 @@ public class CourseMapper implements RowMapper<Course> {
 		// YOUR CODE STARTS HERE
 
 		int courseId = rs.getInt("cid");
-		String courseName = rs.getString("courseName");
+		String courseName = rs.getString("courseCode"); //not course name but course code
 		String courseDesc = rs.getString("courseDesc");
 		int teacherId = rs.getInt("teacherId");
 

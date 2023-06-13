@@ -59,7 +59,7 @@ public class TeacherDaoImpl implements TeacherDao {
 	public void updateTeacher(Teacher t) {
 		// YOUR CODE STARTS HERE
 
-		String sql = "update teacher set tFNamer=?,tLName=?,dept=? where tid=?";
+		String sql = "update teacher set tFName=?,tLName=?,dept=? where tid=?";
 		jdbcTemplate.update(sql, t.getTeacherFName(), t.getTeacherLName(), t.getDept(), t.getTeacherId());
 
 		// YOUR CODE ENDS HERE

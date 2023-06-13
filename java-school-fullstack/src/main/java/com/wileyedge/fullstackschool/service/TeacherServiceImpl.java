@@ -52,14 +52,12 @@ public class TeacherServiceImpl implements TeacherServiceInterface {
 		// YOUR CODE STARTS HERE
 		returnedTeacher = teacher;
 
-		if (returnedTeacher.getTeacherFName().equals("")) {
+		if (returnedTeacher.getTeacherFName().equals("")||returnedTeacher.getTeacherLName().equals("")) {
 			returnedTeacher.setTeacherFName("First Name blank, teacher NOT added");
-			return returnedTeacher;
-		}
-		if (returnedTeacher.getTeacherLName().equals("")) {
 			returnedTeacher.setTeacherLName("Last Name blank, teacher NOT added");
 			return returnedTeacher;
 		}
+		
 
 		returnedTeacher = teacherDao.createNewTeacher(teacher);
 		return returnedTeacher;

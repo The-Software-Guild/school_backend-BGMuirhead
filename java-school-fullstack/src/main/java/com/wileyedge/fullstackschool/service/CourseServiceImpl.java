@@ -54,15 +54,12 @@ public class CourseServiceImpl implements CourseServiceInterface {
 
 		returnedCourse = course;
 
-		if (course.getCourseName().equals("")) {
+		if (course.getCourseName().equals("")||course.getCourseDesc().equals("")) {
 			returnedCourse.setCourseName("Name blank, course NOT added");
-			return returnedCourse;
-		}
-		if (course.getCourseDesc().equals("")) {
 			returnedCourse.setCourseDesc("Description blank, course NOT added");
 			return returnedCourse;
 		}
-
+	
 		returnedCourse = courseDao.createNewCourse(course);
 		return returnedCourse;
 
@@ -74,6 +71,7 @@ public class CourseServiceImpl implements CourseServiceInterface {
 		returnedCourse = course;
 
 		if (id != returnedCourse.getCourseId()) {
+			returnedCourse.setCourseName("IDs do not match, course not updated");
 			returnedCourse.setCourseDesc("IDs do not match, course not updated");
 			return returnedCourse;
 		}

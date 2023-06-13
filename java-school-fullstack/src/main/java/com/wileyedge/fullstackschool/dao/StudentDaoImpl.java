@@ -61,7 +61,7 @@ public class StudentDaoImpl implements StudentDao {
 	public void updateStudent(Student student) {
 		// YOUR CODE STARTS HERE
 
-		String sql = "update student, set fName=?,lName=? where sid =?";
+		String sql = "update student set fName=?,lName=? where sid =?";
 
 		jdbcTemplate.update(sql, student.getStudentFirstName(), student.getStudentLastName(), student.getStudentId());
 

@@ -55,15 +55,12 @@ public class StudentServiceImpl implements StudentServiceInterface {
 		// YOUR CODE STARTS HERE
 
 		returnedStudent = student;
-		if (returnedStudent.getStudentFirstName().equals("")) {
+		if (returnedStudent.getStudentFirstName().equals("")||returnedStudent.getStudentLastName().equals("")) {
 			returnedStudent.setStudentFirstName("First Name blank, student NOT added");
-			return returnedStudent;
-		}
-		if (returnedStudent.getStudentLastName().equals("")) {
 			returnedStudent.setStudentLastName("Last Name blank, student NOT added");
 			return returnedStudent;
 		}
-
+		
 		returnedStudent = studentDao.createNewStudent(student);
 		return returnedStudent;
 

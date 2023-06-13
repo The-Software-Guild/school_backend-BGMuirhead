@@ -59,7 +59,7 @@ public class CourseDaoImpl implements CourseDao {
 	public void updateCourse(Course course) {
 		// YOUR CODE STARTS HERE
 
-		String sql = "update course set courseName=?,courseDesc=?,teacherId=? where cid=?";
+		String sql = "update course set courseCode=?,courseDesc=?,teacherId=? where cid=?";
 
 		jdbcTemplate.update(sql, course.getCourseName(), course.getCourseDesc(), course.getTeacherId(),
 				course.getCourseId());
@@ -82,7 +82,7 @@ public class CourseDaoImpl implements CourseDao {
 	public void deleteAllStudentsFromCourse(int courseId) {
 		// YOUR CODE STARTS HERE
 
-		String sql = "delete from course_student where cid=?";
+		String sql = "delete from course_student where course_id=?";
 
 		jdbcTemplate.update(sql, new Object[] { courseId });
 
